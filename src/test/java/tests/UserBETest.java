@@ -35,10 +35,10 @@ public class UserBETest {
         driver.manage().window().maximize();
 
         WebElement emailElement = driver.findElement(By.id("email"));
-        emailElement.sendKeys("test1234@gmail.com");
+        emailElement.sendKeys(requestBody.getEmail());
 
         WebElement passwordElement = driver.findElement(By.id("password"));
-        passwordElement.sendKeys("SuperSecure@123");
+        passwordElement.sendKeys(requestBody.getPassword());
 
         WebElement loginButton = driver.findElement(By.className("btnSubmit"));
         loginButton.click();
