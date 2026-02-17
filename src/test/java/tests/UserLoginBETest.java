@@ -6,7 +6,6 @@ import io.restassured.specification.RequestSpecification;
 import models.*;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
 import sharedData.SharedData;
 
 public class UserLoginBETest extends SharedData {
