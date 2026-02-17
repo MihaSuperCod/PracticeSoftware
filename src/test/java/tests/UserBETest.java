@@ -11,8 +11,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.LoginPage;
+import sharedData.SharedData;
 
-public class UserBETest {
+public class UserBETest extends SharedData {
 
     @Test
     public void userTest(){
@@ -25,22 +27,11 @@ public class UserBETest {
         RequestUserModel requestBody = new RequestUserModel("Miha", "Moga", addressModel, "0987654321", "1970-01-01", "SuperSecure@123", "test1234@gmail.com");
 
         request.body(requestBody);
-        Response response = request.post("/users/register");
+        Response response = request.post("users/register");
         System.out.println(response.getStatusLine());
         response.body().prettyPrint();
         Assert.assertEquals(response.getStatusCode(), 201);
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://practicesoftwaretesting.com/auth/login");
-        driver.manage().window().maximize();
-
-        WebElement emailElement = driver.findElement(By.id("email"));
-        emailElement.sendKeys(requestBody.getEmail());
-
-        WebElement passwordElement = driver.findElement(By.id("password"));
-        passwordElement.sendKeys(requestBody.getPassword());
-
-        WebElement loginButton = driver.findElement(By.className("btnSubmit"));
-        loginButton.click();
-    }
-}
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.logInProcess(requestBody.getEmail(), requestBody.getPassword());
+}}
