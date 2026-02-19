@@ -46,7 +46,6 @@ public class UserLoginBETest extends SharedData {
         System.out.println(response3.getStatusLine());
         response3.body().prettyPrint();
         Assert.assertEquals(response3.getStatusCode(), 200);
-
         //Pasul 4: delogam userul
         System.out.println("STEP 4: LOGOUT USER REQUEST");
         request.header("Authorization", "Bearer " +  responseBody2.getAccess_token());
