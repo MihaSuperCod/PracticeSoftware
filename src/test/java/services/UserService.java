@@ -8,6 +8,7 @@ import models.*;
 import org.testng.Assert;
 import types.EndpointType;
 import types.RequestMethodType;
+import types.RequestStatusType;
 
 public class UserService {
 
@@ -21,7 +22,7 @@ public class UserService {
         Response response= performRequest(RequestMethodType.REQUEST_POST,request, EndpointType.USER_CREATE_ENDPOINT);
         System.out.println(response.getStatusLine());
         response.body().prettyPrint();
-        Assert.assertEquals(response.getStatusCode(), 201);
+        Assert.assertEquals(response.getStatusCode(), RequestStatusType.RESPONSE_CREATED);
         return response.getBody().as(ResponseUserModel.class);
     }
 
@@ -34,7 +35,7 @@ public class UserService {
         Response response = performRequest(RequestMethodType.REQUEST_POST, request,EndpointType.USER_LOGIN_ENDPOINT);
         System.out.println(response.getStatusLine());
         response.body().prettyPrint();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.getStatusCode(), RequestStatusType.RESPONSE_OK);
         return response.getBody().as(ResponseUserLoginModel.class);
     }
 
@@ -57,7 +58,7 @@ public class UserService {
         Response response4 = performRequest(RequestMethodType.REQUEST_GET, request, EndpointType.USER_LOGOUT_ENDPOINT);
         System.out.println(response4.getStatusLine());
         response4.body().prettyPrint();
-        Assert.assertEquals(response4.getStatusCode(), 200);
+        Assert.assertEquals(response4.getStatusCode(), RequestStatusType.RESPONSE_OK);
     }
 
     public ResponseUserLoginModel loginUser(RequestUserLoginModel requestBody){
@@ -68,7 +69,7 @@ public class UserService {
         Response response = performRequest(RequestMethodType.REQUEST_POST,request,EndpointType.USER_LOGIN_ENDPOINT);
         System.out.println(response.getStatusLine());
         response.body().prettyPrint();
-        Assert.assertEquals(response.getStatusCode(), 200);
+        Assert.assertEquals(response.getStatusCode(), RequestStatusType.RESPONSE_OK);
         return response.getBody().as(ResponseUserLoginModel.class);
     }
 
@@ -80,7 +81,7 @@ public class UserService {
         Response response6 = performRequest(RequestMethodType.REQUEST_DELETE,request ,EndpointType.USER_SPECIFIC_ENDPOINT+ userID);
         System.out.println(response6.getStatusLine());
         response6.body().prettyPrint();
-        Assert.assertEquals(response6.getStatusCode(), 204);
+        Assert.assertEquals(response6.getStatusCode(), RequestStatusType.RESPONSE_NO_CONTENT);
     }
 
     private Response performRequest(String requestType, RequestSpecification request, String endpoint){
