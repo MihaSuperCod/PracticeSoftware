@@ -8,13 +8,15 @@ import org.testng.Assert;
 import types.EndpointType;
 import types.RequestMethodType;
 import types.RequestStatusType;
+import utils.LogUtility;
 
 public class ImageService {
     public void obtainAllImages(){
-        System.out.println("STEP 1: GET ALL IMAGES REQUEST");
+        LogUtility.infoLog("STEP 1: GET ALL IMAGES REQUEST");
         RequestSpecification request = RestAssured.given();
+
         Response response1 = performRequest(RequestMethodType.REQUEST_GET,request, EndpointType.IMAGE_GET_ALL_IMAGES);
-        System.out.println(response1.getStatusLine());
+        LogUtility.infoLog(response1.getStatusLine());
         response1.body().prettyPrint();
         Assert.assertEquals(response1.getStatusCode(), RequestStatusType.RESPONSE_OK);
     }

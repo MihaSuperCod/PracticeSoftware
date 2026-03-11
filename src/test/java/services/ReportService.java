@@ -8,15 +8,17 @@ import org.testng.Assert;
 import types.EndpointType;
 import types.RequestMethodType;
 import types.RequestStatusType;
+import utils.LogUtility;
 
 public class ReportService {
 
     public void generateAverageSalesPerMonthReport(String token){
-        System.out.println("STEP 2: GENERATE REPORT");
+        LogUtility.infoLog("STEP 2: GENERATE REPORT");
         RequestSpecification request = RestAssured.given();
         request.header("Authorization", "Bearer " + token);
+
         Response response2 = performRequest(RequestMethodType.REQUEST_GET,request, EndpointType.REPORT_AVERAGE_SALES);
-        System.out.println(response2.getStatusLine());
+        LogUtility.infoLog(response2.getStatusLine());
         response2.body().prettyPrint();
         Assert.assertEquals(response2.getStatusCode(), RequestStatusType.RESPONSE_OK);
     }
