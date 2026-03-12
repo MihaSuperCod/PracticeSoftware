@@ -10,18 +10,14 @@ import types.RequestMethodType;
 import types.RequestStatusType;
 import utils.LogUtility;
 
-public class ImageService {
+public class ImageService extends CommonService {
     public void obtainAllImages(){
         LogUtility.infoLog("STEP 1: GET ALL IMAGES REQUEST");
         RequestSpecification request = RestAssured.given();
 
-        Response response1 = performRequest(RequestMethodType.REQUEST_GET,request, EndpointType.IMAGE_GET_ALL_IMAGES);
-        LogUtility.infoLog(response1.getStatusLine());
-        response1.body().prettyPrint();
-        Assert.assertEquals(response1.getStatusCode(), RequestStatusType.RESPONSE_OK);
-    }
-
-    private Response performRequest(String requestType, RequestSpecification request, String endpoint){
-        return new RestClient().performRequest(requestType, request, endpoint);
+        Response response = performRequest(RequestMethodType.REQUEST_GET,request, EndpointType.IMAGE_GET_ALL_IMAGES);
+        LogUtility.infoLog(response.getStatusLine());
+        LogUtility.infoLog(response.getBody().asPrettyString());
+        Assert.assertEquals(response.getStatusCode(), RequestStatusType.RESPONSE_OK);
     }
 }
